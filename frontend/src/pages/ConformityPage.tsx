@@ -27,16 +27,22 @@ const ConformityPage: React.FC = () => {
   return (
     <Container maxWidth="xl" disableGutters data-testid="conformity-page">
       <Box mb={5}>
-        <Typography variant="overline" sx={{ color: "secondary.dark" }}>Transparency</Typography>
-        <Typography variant="h4" sx={{ fontWeight: 700, mt: 0.5 }}>Data sources & legal framework</Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary", mt: 1, maxWidth: 760 }}>
+        <Typography variant="overline" sx={{ color: "#00c9a7" }}>
+          Transparency
+        </Typography>
+        <Typography variant="h4" sx={{ fontWeight: 700, mt: 0.5 }}>
+          Data sources & legal framework
+        </Typography>
+        <Typography variant="body2" sx={{ color: "text.secondary", mt: 1, maxWidth: 760, lineHeight: 1.7 }}>
           Apro-Vision relies exclusively on publicly available European Space Agency satellite feeds.
           The platform is designed for use as decision-support analytics for CSDDD due-diligence
           processes.
         </Typography>
       </Box>
 
-      <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>Data sources</Typography>
+      <Typography variant="h6" sx={{ fontWeight: 700, mb: 2 }}>
+        Data sources
+      </Typography>
       <Box
         sx={{
           display: "grid",
@@ -58,19 +64,28 @@ const ConformityPage: React.FC = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    bgcolor: "primary.main",
-                    color: "primary.contrastText",
+                    bgcolor: "rgba(0,201,167,0.12)",
+                    color: "#00c9a7",
+                    border: "1px solid rgba(0,201,167,0.28)",
                     flexShrink: 0,
                   }}
                 >
                   {ICONS[source.icon] ?? <SatelliteAltRoundedIcon />}
                 </Box>
                 <Box>
-                  <Typography variant="h6" sx={{ fontWeight: 700 }}>{source.title}</Typography>
-                  <Typography variant="body2" sx={{ color: "text.secondary", mt: 0.5, lineHeight: 1.6 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                    {source.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "text.secondary", mt: 0.5, lineHeight: 1.6 }}
+                  >
                     {source.description}
                   </Typography>
-                  <Typography variant="caption" sx={{ color: "secondary.dark", fontWeight: 600, mt: 1.25, display: "block", letterSpacing: "0.04em" }}>
+                  <Typography
+                    variant="overline"
+                    sx={{ color: "#00c9a7", mt: 1.5, display: "block", fontSize: "0.68rem" }}
+                  >
                     {source.reference}
                   </Typography>
                 </Box>
@@ -87,14 +102,16 @@ const ConformityPage: React.FC = () => {
           p: { xs: 3, md: 4 },
           mb: 5,
           borderLeft: "4px solid",
-          borderLeftColor: "primary.main",
-          bgcolor: "rgba(15, 42, 71, 0.03)",
+          borderLeftColor: "#00c9a7",
+          background: "rgba(0,201,167,0.04)",
         }}
       >
         <Stack direction="row" spacing={2} alignItems="flex-start">
-          <ShieldRoundedIcon sx={{ color: "primary.main", mt: 0.5 }} />
+          <ShieldRoundedIcon sx={{ color: "#00c9a7", mt: 0.5 }} />
           <Box>
-            <Typography variant="h6" sx={{ fontWeight: 700, mb: 1.5 }}>Legal disclaimer</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 700, mb: 1.5 }}>
+              Legal disclaimer
+            </Typography>
             <Typography variant="body1" sx={{ color: "text.primary", lineHeight: 1.75 }}>
               This platform provides analytical insights derived from publicly available satellite
               data sources. All outputs represent risk indications and analytical suggestions and
@@ -107,10 +124,19 @@ const ConformityPage: React.FC = () => {
 
       {/* Download */}
       <Card sx={{ p: { xs: 3, md: 4 } }} data-testid="whitepaper-card">
-        <Stack direction={{ xs: "column", md: "row" }} alignItems={{ xs: "flex-start", md: "center" }} justifyContent="space-between" spacing={3}>
+        <Stack
+          direction={{ xs: "column", md: "row" }}
+          alignItems={{ xs: "flex-start", md: "center" }}
+          justifyContent="space-between"
+          spacing={3}
+        >
           <Box>
-            <Typography variant="overline" sx={{ color: "secondary.dark" }}>Reference document</Typography>
-            <Typography variant="h6" sx={{ fontWeight: 700, mt: 0.5 }}>Apro-Vision CSDDD Whitepaper</Typography>
+            <Typography variant="overline" sx={{ color: "#00c9a7" }}>
+              Reference document
+            </Typography>
+            <Typography variant="h6" sx={{ fontWeight: 700, mt: 0.5 }}>
+              Apro-Vision CSDDD Whitepaper
+            </Typography>
             <Typography variant="body2" sx={{ color: "text.secondary", mt: 0.5, maxWidth: 560 }}>
               Detailed methodology, data lineage and CSDDD article-level mapping for compliance teams.
             </Typography>

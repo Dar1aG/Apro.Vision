@@ -38,17 +38,25 @@ const StatCard: React.FC<StatProps> = ({ icon, label, value, accent, testId }) =
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            bgcolor: `${accent}14`,
+            bgcolor: `${accent}1f`,
             color: accent,
+            border: `1px solid ${accent}40`,
           }}
         >
           {icon}
         </Box>
-        <Typography variant="overline" sx={{ color: "text.secondary", fontSize: 11 }}>
-          {label}
-        </Typography>
+        <Typography variant="overline">{label}</Typography>
       </Stack>
-      <Typography variant="h3" sx={{ mt: 2.5, fontWeight: 700, letterSpacing: "-0.01em" }}>
+      <Typography
+        variant="h3"
+        sx={{
+          mt: 2.5,
+          fontWeight: 700,
+          letterSpacing: "-0.015em",
+          fontFamily: '"DM Mono", monospace',
+          color: "text.primary",
+        }}
+      >
         {value}
       </Typography>
     </CardContent>
@@ -64,27 +72,32 @@ const HomePage: React.FC = () => {
         sx={{
           position: "relative",
           overflow: "hidden",
-          borderRadius: 3,
+          borderRadius: 4,
           p: { xs: 3, md: 6 },
           mb: 5,
-          bgcolor: "primary.main",
-          color: "primary.contrastText",
+          color: "text.primary",
+          background:
+            "linear-gradient(135deg, rgba(18,37,61,0.95) 0%, rgba(13,27,46,0.95) 100%)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
           backgroundImage:
-            "radial-gradient(circle at 18% 20%, rgba(46, 125, 82, 0.35) 0%, transparent 42%), radial-gradient(circle at 82% 78%, rgba(31, 64, 104, 0.55) 0%, transparent 50%)",
+            "radial-gradient(circle at 18% 20%, rgba(0,201,167,0.18) 0%, transparent 42%), radial-gradient(circle at 82% 78%, rgba(74,158,255,0.14) 0%, transparent 50%), linear-gradient(135deg, rgba(18,37,61,0.95) 0%, rgba(13,27,46,0.95) 100%)",
         }}
       >
         <Stack direction={{ xs: "column", lg: "row" }} spacing={5} alignItems="stretch">
           <Box sx={{ flex: 1 }}>
             <Chip
-              icon={<SatelliteAltRoundedIcon sx={{ color: "secondary.light !important" }} />}
+              icon={<SatelliteAltRoundedIcon sx={{ color: "#00c9a7 !important" }} />}
               label="Copernicus Sentinel · CSDDD aligned"
               data-testid="hero-tagline"
               sx={{
-                bgcolor: "rgba(255,255,255,0.1)",
-                color: "common.white",
-                border: "1px solid rgba(255,255,255,0.18)",
-                fontWeight: 500,
-                mb: 3,
+                bgcolor: "rgba(0,201,167,0.10)",
+                color: "#00c9a7",
+                border: "1px solid rgba(0,201,167,0.28)",
+                fontWeight: 600,
+                letterSpacing: "0.04em",
+                mb: 3.5,
               }}
             />
             <Typography
@@ -105,8 +118,8 @@ const HomePage: React.FC = () => {
               sx={{
                 fontSize: { xs: "1rem", md: "1.125rem" },
                 maxWidth: 620,
-                color: "rgba(255,255,255,0.82)",
-                lineHeight: 1.65,
+                color: "text.secondary",
+                lineHeight: 1.7,
                 mb: 4,
               }}
               data-testid="hero-description"
@@ -122,11 +135,6 @@ const HomePage: React.FC = () => {
                 startIcon={<BusinessRoundedIcon />}
                 onClick={() => navigate("/companies")}
                 data-testid="cta-view-companies"
-                sx={{
-                  bgcolor: "common.white",
-                  color: "primary.main",
-                  "&:hover": { bgcolor: "rgba(255,255,255,0.92)" },
-                }}
               >
                 View Companies
               </Button>
@@ -136,11 +144,6 @@ const HomePage: React.FC = () => {
                 startIcon={<RadarRoundedIcon />}
                 onClick={() => navigate("/solutions")}
                 data-testid="cta-open-risk-radar"
-                sx={{
-                  color: "common.white",
-                  borderColor: "rgba(255,255,255,0.5)",
-                  "&:hover": { borderColor: "common.white", bgcolor: "rgba(255,255,255,0.08)" },
-                }}
               >
                 Open Risk Radar
               </Button>
@@ -152,9 +155,9 @@ const HomePage: React.FC = () => {
               flex: 1,
               minHeight: 280,
               borderRadius: 3,
-              border: "1px solid rgba(255,255,255,0.14)",
-              bgcolor: "rgba(255,255,255,0.04)",
-              backdropFilter: "blur(8px)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              bgcolor: "rgba(255,255,255,0.02)",
+              backdropFilter: "blur(10px)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -162,19 +165,35 @@ const HomePage: React.FC = () => {
               overflow: "hidden",
             }}
           >
-            {/* Decorative satellite grid */}
             <Box
               sx={{
                 position: "absolute",
                 inset: 0,
                 backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)",
+                  "linear-gradient(rgba(0,201,167,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.08) 1px, transparent 1px)",
                 backgroundSize: "32px 32px",
+                maskImage: "radial-gradient(circle at center, black 35%, transparent 75%)",
+                WebkitMaskImage: "radial-gradient(circle at center, black 35%, transparent 75%)",
               }}
             />
             <Box sx={{ position: "relative", textAlign: "center" }}>
-              <SatelliteAltRoundedIcon sx={{ fontSize: 96, color: "secondary.light", opacity: 0.92 }} />
-              <Typography variant="overline" sx={{ display: "block", mt: 1, color: "rgba(255,255,255,0.7)", letterSpacing: "0.16em" }}>
+              <Box
+                sx={{
+                  width: 120,
+                  height: 120,
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  mx: "auto",
+                  background:
+                    "radial-gradient(circle, rgba(0,201,167,0.25) 0%, rgba(0,201,167,0.04) 60%, transparent 100%)",
+                  border: "1px solid rgba(0,201,167,0.32)",
+                }}
+              >
+                <SatelliteAltRoundedIcon sx={{ fontSize: 72, color: "#00c9a7" }} />
+              </Box>
+              <Typography variant="overline" sx={{ display: "block", mt: 2, color: "#8fa3bb" }}>
                 Sentinel Live Feed
               </Typography>
             </Box>
@@ -196,35 +215,35 @@ const HomePage: React.FC = () => {
           icon={<ApartmentRoundedIcon />}
           label="Monitored Companies"
           value={platformStats.totalCompanies}
-          accent="#0F2A47"
+          accent="#4a9eff"
           testId="stat-companies"
         />
         <StatCard
           icon={<BusinessRoundedIcon />}
           label="Tracked Suppliers"
           value={platformStats.totalSuppliers}
-          accent="#2E7D52"
+          accent="#00c9a7"
           testId="stat-suppliers"
         />
         <StatCard
           icon={<WarningAmberRoundedIcon />}
           label="Active High Risks"
           value={platformStats.activeRisks}
-          accent="#C8362D"
+          accent="#ef4444"
           testId="stat-risks"
         />
         <StatCard
           icon={<PublicRoundedIcon />}
           label="Countries Covered"
           value={platformStats.countriesCovered}
-          accent="#1F4068"
+          accent="#f59e0b"
           testId="stat-countries"
         />
       </Box>
 
       {/* Quick guide */}
       <Box>
-        <Typography variant="overline" sx={{ color: "secondary.dark" }}>
+        <Typography variant="overline" sx={{ color: "#00c9a7" }}>
           How it works
         </Typography>
         <Typography variant="h4" sx={{ mt: 0.5, mb: 3, fontWeight: 700 }}>
@@ -245,7 +264,7 @@ const HomePage: React.FC = () => {
             <Card key={step.title} sx={{ p: 3 }} data-testid={`workflow-card-${i}`}>
               <Typography
                 variant="overline"
-                sx={{ color: "text.secondary", fontFamily: '"IBM Plex Mono", monospace' }}
+                sx={{ color: "text.secondary", fontFamily: '"DM Mono", monospace', letterSpacing: "0.16em" }}
               >
                 Step 0{i + 1}
               </Typography>

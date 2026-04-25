@@ -49,10 +49,10 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({ onToggleSidebar })
           <Stack direction="row" spacing={1.5} alignItems="center" component={RouterLink} to="/" sx={{ textDecoration: "none", color: "inherit" }}>
             <Logo size={38} />
             <Box>
-              <Typography variant="h6" sx={{ lineHeight: 1, fontWeight: 700 }}>
+              <Typography variant="h6" sx={{ lineHeight: 1, fontWeight: 700, color: "text.primary" }}>
                 Apro-Vision
               </Typography>
-              <Typography variant="caption" sx={{ color: "text.secondary", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              <Typography variant="caption" sx={{ color: "text.secondary", letterSpacing: "0.08em", textTransform: "uppercase", fontSize: 10 }}>
                 ESG Compliance Intelligence
               </Typography>
             </Box>
@@ -75,8 +75,8 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({ onToggleSidebar })
                   to={link.path}
                   data-testid={`nav-link-${link.label.toLowerCase()}`}
                   sx={{
-                    color: active ? "primary.main" : "text.secondary",
-                    fontWeight: active ? 700 : 500,
+                    color: active ? "#00c9a7" : "text.secondary",
+                    fontWeight: active ? 600 : 500,
                     px: 2,
                     py: 1,
                     position: "relative",
@@ -89,10 +89,10 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({ onToggleSidebar })
                           bottom: 6,
                           height: 2,
                           borderRadius: 2,
-                          bgcolor: "secondary.main",
+                          bgcolor: "#00c9a7",
                         }
                       : undefined,
-                    "&:hover": { color: "primary.main", bgcolor: "transparent" },
+                    "&:hover": { color: "text.primary", bgcolor: "transparent" },
                   }}
                 >
                   {link.label}
@@ -116,7 +116,7 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({ onToggleSidebar })
                         height: 8,
                         bgcolor: "error.main",
                         borderRadius: "50%",
-                        border: "2px solid #FFFFFF",
+                        border: "2px solid #0d1b2e",
                       }}
                     />
                   )}
@@ -134,12 +134,13 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({ onToggleSidebar })
                 sx={{
                   width: 36,
                   height: 36,
-                  bgcolor: "primary.main",
-                  color: "primary.contrastText",
+                  bgcolor: "rgba(0,201,167,0.18)",
+                  color: "#00c9a7",
                   fontWeight: 700,
-                  fontSize: 14,
+                  fontSize: 13,
                   ml: 0.5,
                   cursor: "pointer",
+                  border: "1px solid rgba(0,201,167,0.4)",
                 }}
               >
                 EC

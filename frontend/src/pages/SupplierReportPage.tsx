@@ -63,13 +63,13 @@ const SupplierReportPage: React.FC = () => {
 
       <Stack direction={{ xs: "column", md: "row" }} spacing={2} alignItems={{ xs: "flex-start", md: "flex-end" }} justifyContent="space-between" mb={4}>
         <Box>
-          <Typography variant="overline" sx={{ color: "secondary.dark" }}>Supplier report</Typography>
+          <Typography variant="overline" sx={{ color: "#00c9a7" }}>Supplier report</Typography>
           <Typography variant="h4" sx={{ fontWeight: 700, mt: 0.5 }} data-testid="supplier-name">{supplier.name}</Typography>
           <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mt: 1, color: "text.secondary" }}>
             <LocationOnRoundedIcon fontSize="small" />
             <Typography variant="body2">{supplier.location.city}, {supplier.location.country}</Typography>
             <Typography variant="body2" sx={{ opacity: 0.5 }}>·</Typography>
-            <Typography variant="body2">Linked brand: <b style={{ color: "#0F2A47" }}>{supplier.companyName}</b></Typography>
+            <Typography variant="body2">Linked brand: <b style={{ color: "#e8edf4" }}>{supplier.companyName}</b></Typography>
           </Stack>
         </Box>
         <RiskBadge level={supplier.riskLevel} size="medium" />
@@ -177,7 +177,7 @@ const SupplierReportPage: React.FC = () => {
                       <Typography variant="caption" sx={{ color: c, fontWeight: 700, letterSpacing: "0.06em" }}>
                         {a.severity}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: "text.secondary", fontFamily: '"IBM Plex Mono", monospace' }}>{a.date}</Typography>
+                      <Typography variant="caption" sx={{ color: "text.secondary", fontFamily: '"DM Mono", monospace' }}>{a.date}</Typography>
                     </Stack>
                     <Typography variant="body2">{a.description}</Typography>
                   </Box>

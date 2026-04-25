@@ -1,83 +1,103 @@
-import { createTheme, ThemeOptions } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
-// Risk colors (mandatory mapping from spec)
+// Risk / status colors (semantic, soft-style usage)
 export const RISK_COLORS = {
-  LOW: "#2E7D52",
-  MEDIUM: "#E08A1A",
-  HIGH: "#C8362D",
+  LOW: "#22c55e",
+  MEDIUM: "#f59e0b",
+  HIGH: "#ef4444",
 } as const;
 
-// Deep Navy Blue primary (Technology, Authority, Trust)
-const PRIMARY = "#0F2A47";
-const PRIMARY_LIGHT = "#1F4068";
-const PRIMARY_DARK = "#08182B";
+// Brand
+const PRIMARY = "#00c9a7";
+const PRIMARY_DARK = "#0d1b2e";
+const ACCENT = "#4a9eff";
 
-// Environmental green secondary
-const SECONDARY = "#2E7D52";
+// Surfaces
+const BG_DEFAULT = "#0d1b2e";
+const BG_PAPER = "rgba(18,37,61,0.8)";
+const BG_APPBAR = "rgba(13,27,46,0.92)";
+const BG_DRAWER = "rgba(13,27,46,0.6)";
 
-const baseOptions: ThemeOptions = {
+// Text
+const TEXT_PRIMARY = "#e8edf4";
+const TEXT_SECONDARY = "#8fa3bb";
+const TEXT_MUTED = "#5a7491";
+
+// Lines
+const DIVIDER = "rgba(255,255,255,0.07)";
+const DIVIDER_HOVER = "rgba(255,255,255,0.14)";
+
+export const theme = createTheme({
   palette: {
-    mode: "light",
-    primary: {
-      main: PRIMARY,
-      light: PRIMARY_LIGHT,
-      dark: PRIMARY_DARK,
-      contrastText: "#FFFFFF",
-    },
-    secondary: {
-      main: SECONDARY,
-      light: "#4FA374",
-      dark: "#1E5837",
-      contrastText: "#FFFFFF",
-    },
+    mode: "dark",
+    primary: { main: PRIMARY, contrastText: PRIMARY_DARK },
+    secondary: { main: ACCENT, contrastText: PRIMARY_DARK },
     success: { main: RISK_COLORS.LOW },
     warning: { main: RISK_COLORS.MEDIUM },
     error: { main: RISK_COLORS.HIGH },
-    background: {
-      default: "#F4F6F9",
-      paper: "#FFFFFF",
-    },
-    text: {
-      primary: "#0F2A47",
-      secondary: "#4A5A6E",
-    },
-    divider: "rgba(15, 42, 71, 0.08)",
+    background: { default: BG_DEFAULT, paper: BG_PAPER },
+    text: { primary: TEXT_PRIMARY, secondary: TEXT_SECONDARY, disabled: TEXT_MUTED },
+    divider: DIVIDER,
   },
   typography: {
-    fontFamily: '"IBM Plex Sans", "Manrope", -apple-system, BlinkMacSystemFont, sans-serif',
-    h1: { fontFamily: '"IBM Plex Sans", sans-serif', fontWeight: 700, letterSpacing: "-0.02em" },
-    h2: { fontFamily: '"IBM Plex Sans", sans-serif', fontWeight: 700, letterSpacing: "-0.015em" },
-    h3: { fontFamily: '"IBM Plex Sans", sans-serif', fontWeight: 600, letterSpacing: "-0.01em" },
-    h4: { fontFamily: '"IBM Plex Sans", sans-serif', fontWeight: 600 },
-    h5: { fontFamily: '"IBM Plex Sans", sans-serif', fontWeight: 600 },
-    h6: { fontFamily: '"IBM Plex Sans", sans-serif', fontWeight: 600, letterSpacing: 0 },
-    button: { textTransform: "none", fontWeight: 600, letterSpacing: 0 },
-    overline: { letterSpacing: "0.12em", fontWeight: 600 },
+    fontFamily: '"DM Sans", -apple-system, BlinkMacSystemFont, sans-serif',
+    h1: { fontFamily: '"DM Sans", sans-serif', fontWeight: 700, letterSpacing: "-0.02em" },
+    h2: { fontFamily: '"DM Sans", sans-serif', fontWeight: 700, letterSpacing: "-0.02em" },
+    h3: { fontFamily: '"DM Sans", sans-serif', fontWeight: 700, letterSpacing: "-0.015em" },
+    h4: { fontFamily: '"DM Sans", sans-serif', fontWeight: 700, letterSpacing: "-0.01em" },
+    h5: { fontFamily: '"DM Sans", sans-serif', fontWeight: 600 },
+    h6: { fontFamily: '"DM Sans", sans-serif', fontWeight: 600 },
+    button: { textTransform: "none", fontWeight: 600 },
+    overline: {
+      fontFamily: '"DM Sans", sans-serif',
+      fontSize: "0.72rem",
+      fontWeight: 600,
+      letterSpacing: "0.08em",
+      textTransform: "uppercase",
+      color: TEXT_MUTED,
+      lineHeight: 1.4,
+    },
   },
   shape: { borderRadius: 12 },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          backgroundColor: "#F4F6F9",
-          fontFeatureSettings: '"ss01", "cv11"',
+          backgroundColor: BG_DEFAULT,
+          color: TEXT_PRIMARY,
+          backgroundImage:
+            "radial-gradient(circle at 12% 8%, rgba(0,201,167,0.06) 0%, transparent 38%), radial-gradient(circle at 88% 92%, rgba(74,158,255,0.05) 0%, transparent 42%)",
+          backgroundAttachment: "fixed",
         },
         "*::-webkit-scrollbar": { width: 10, height: 10 },
         "*::-webkit-scrollbar-track": { background: "transparent" },
-        "*::-webkit-scrollbar-thumb": {
-          background: "rgba(15, 42, 71, 0.18)",
-          borderRadius: 8,
-        },
-        "*::-webkit-scrollbar-thumb:hover": { background: "rgba(15, 42, 71, 0.32)" },
+        "*::-webkit-scrollbar-thumb": { background: "rgba(255,255,255,0.08)", borderRadius: 8 },
+        "*::-webkit-scrollbar-thumb:hover": { background: "rgba(255,255,255,0.18)" },
       },
     },
     MuiAppBar: {
       defaultProps: { elevation: 0 },
       styleOverrides: {
         root: {
-          backgroundColor: "#FFFFFF",
-          color: PRIMARY,
-          borderBottom: "1px solid rgba(15, 42, 71, 0.08)",
+          backgroundColor: BG_APPBAR,
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          boxShadow: "none",
+          borderBottom: `1px solid ${DIVIDER}`,
+          color: TEXT_PRIMARY,
+          backgroundImage: "none",
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: BG_DRAWER,
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderRight: `1px solid ${DIVIDER}`,
+          backgroundImage: "none",
+          color: TEXT_PRIMARY,
         },
       },
     },
@@ -86,7 +106,11 @@ const baseOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           backgroundImage: "none",
-          border: "1px solid rgba(15, 42, 71, 0.06)",
+          backgroundColor: BG_PAPER,
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          border: `1px solid ${DIVIDER}`,
+          boxShadow: "none",
         },
       },
     },
@@ -94,12 +118,15 @@ const baseOptions: ThemeOptions = {
       defaultProps: { elevation: 0 },
       styleOverrides: {
         root: {
-          border: "1px solid rgba(15, 42, 71, 0.06)",
-          transition: "transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease",
-          "&:hover": {
-            boxShadow: "0 12px 32px -16px rgba(15, 42, 71, 0.18)",
-            borderColor: "rgba(15, 42, 71, 0.14)",
-          },
+          backgroundImage: "none",
+          backgroundColor: BG_PAPER,
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          border: `1px solid ${DIVIDER}`,
+          borderRadius: 16,
+          boxShadow: "none",
+          transition: "border-color 220ms ease, transform 220ms ease, background-color 220ms ease",
+          "&:hover": { borderColor: DIVIDER_HOVER },
         },
       },
     },
@@ -110,30 +137,72 @@ const baseOptions: ThemeOptions = {
           borderRadius: 10,
           paddingInline: 18,
           paddingBlock: 10,
-          transition: "transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease",
-          "&:hover": { transform: "translateY(-1px)" },
+          boxShadow: "none",
+          transition: "background-color 160ms ease, border-color 160ms ease, color 160ms ease",
+          "&:hover": { boxShadow: "none" },
         },
         containedPrimary: {
-          boxShadow: "0 8px 18px -10px rgba(15, 42, 71, 0.55)",
+          backgroundColor: PRIMARY,
+          color: PRIMARY_DARK,
+          "&:hover": { backgroundColor: "#1ad8b8" },
+        },
+        outlined: {
+          borderColor: DIVIDER_HOVER,
+          color: TEXT_PRIMARY,
+          "&:hover": { borderColor: PRIMARY, backgroundColor: "rgba(0,201,167,0.06)" },
+        },
+        text: {
+          color: TEXT_SECONDARY,
+          "&:hover": { color: PRIMARY, backgroundColor: "transparent" },
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: TEXT_SECONDARY,
+          "&:hover": { color: TEXT_PRIMARY, backgroundColor: "rgba(255,255,255,0.04)" },
         },
       },
     },
     MuiChip: {
       styleOverrides: {
-        root: { fontWeight: 600, letterSpacing: "0.02em" },
+        root: {
+          borderRadius: 20,
+          fontWeight: 600,
+          letterSpacing: "0.02em",
+        },
+        outlined: {
+          borderColor: DIVIDER_HOVER,
+          color: TEXT_SECONDARY,
+        },
+      },
+    },
+    MuiTableContainer: {
+      styleOverrides: {
+        root: { backgroundColor: "transparent" },
       },
     },
     MuiTableHead: {
       styleOverrides: {
         root: {
-          backgroundColor: "#F7F9FC",
+          backgroundColor: "rgba(255,255,255,0.02)",
           "& .MuiTableCell-head": {
-            fontWeight: 700,
-            color: "#0F2A47",
+            color: TEXT_MUTED,
             textTransform: "uppercase",
-            fontSize: 12,
             letterSpacing: "0.08em",
+            fontSize: "0.72rem",
+            fontWeight: 600,
+            backgroundColor: "transparent",
           },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: `1px solid ${DIVIDER}`,
+          color: TEXT_PRIMARY,
         },
       },
     },
@@ -141,23 +210,83 @@ const baseOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           transition: "background-color 160ms ease",
-          "&:hover": { backgroundColor: "rgba(15, 42, 71, 0.03)" },
+          "&:hover": { backgroundColor: "rgba(255,255,255,0.03)" },
+          "&:last-of-type td": { borderBottom: 0 },
+        },
+      },
+    },
+    MuiTablePagination: {
+      styleOverrides: {
+        root: { color: TEXT_SECONDARY, borderTop: `1px solid ${DIVIDER}` },
+      },
+    },
+    MuiTableSortLabel: {
+      styleOverrides: {
+        root: {
+          color: `${TEXT_MUTED} !important`,
+          "&.Mui-active": { color: `${TEXT_PRIMARY} !important` },
+          "& .MuiTableSortLabel-icon": { color: `${PRIMARY} !important` },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "rgba(255,255,255,0.03)",
+          color: TEXT_PRIMARY,
+          "& fieldset": { borderColor: DIVIDER },
+          "&:hover fieldset": { borderColor: DIVIDER_HOVER },
+          "&.Mui-focused fieldset": { borderColor: PRIMARY },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: { color: TEXT_SECONDARY, "&.Mui-focused": { color: PRIMARY } },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: { icon: { color: TEXT_MUTED } },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: "rgba(13,27,46,0.97)",
+          backgroundImage: "none",
+          border: `1px solid ${DIVIDER_HOVER}`,
         },
       },
     },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          backgroundColor: PRIMARY,
+          backgroundColor: "rgba(13,27,46,0.96)",
+          border: `1px solid ${DIVIDER_HOVER}`,
           fontSize: 12,
           fontWeight: 500,
+          color: TEXT_PRIMARY,
+          backdropFilter: "blur(8px)",
         },
-        arrow: { color: PRIMARY },
+        arrow: { color: "rgba(13,27,46,0.96)" },
+      },
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: { backgroundColor: "rgba(255,255,255,0.06)", borderRadius: 6 },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: { root: { borderColor: DIVIDER } },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          color: TEXT_SECONDARY,
+          "&:hover": { backgroundColor: "rgba(255,255,255,0.04)", color: TEXT_PRIMARY },
+        },
       },
     },
   },
-};
-
-export const theme = createTheme(baseOptions);
+});
 
 export default theme;

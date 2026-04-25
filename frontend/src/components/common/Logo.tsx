@@ -4,12 +4,9 @@ import SatelliteAltRoundedIcon from "@mui/icons-material/SatelliteAltRounded";
 
 interface LogoProps {
   size?: number;
-  variant?: "light" | "dark";
 }
 
-export const Logo: React.FC<LogoProps> = ({ size = 36, variant = "dark" }) => {
-  const bg = variant === "dark" ? "linear-gradient(135deg, #0F2A47 0%, #1F4068 100%)" : "#FFFFFF";
-  const fg = variant === "dark" ? "#FFFFFF" : "#0F2A47";
+export const Logo: React.FC<LogoProps> = ({ size = 36 }) => {
   return (
     <Box
       data-testid="apro-logo"
@@ -17,15 +14,15 @@ export const Logo: React.FC<LogoProps> = ({ size = 36, variant = "dark" }) => {
         width: size,
         height: size,
         borderRadius: 2,
-        background: bg,
+        background: "linear-gradient(135deg, rgba(0,201,167,0.18) 0%, rgba(74,158,255,0.12) 100%)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        boxShadow: "0 6px 16px -8px rgba(15, 42, 71, 0.45)",
-        border: "1px solid rgba(15, 42, 71, 0.12)",
+        border: "1px solid rgba(0,201,167,0.45)",
+        boxShadow: "0 0 0 1px rgba(255,255,255,0.04), inset 0 0 14px rgba(0,201,167,0.18)",
       }}
     >
-      <SatelliteAltRoundedIcon sx={{ color: fg, fontSize: size * 0.6 }} />
+      <SatelliteAltRoundedIcon sx={{ color: "#00c9a7", fontSize: size * 0.58 }} />
     </Box>
   );
 };

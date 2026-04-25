@@ -40,15 +40,16 @@ export const WorkflowDiagram: React.FC = () => {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      bgcolor: "rgba(15, 42, 71, 0.07)",
-                      color: "primary.main",
+                      bgcolor: "rgba(0,201,167,0.12)",
+                      color: "#00c9a7",
+                      border: "1px solid rgba(0,201,167,0.28)",
                     }}
                   >
                     {ICONS[step.icon]}
                   </Box>
                   <Typography
                     variant="overline"
-                    sx={{ color: "secondary.dark", fontFamily: '"IBM Plex Mono", monospace', fontSize: 12 }}
+                    sx={{ color: "#00c9a7", fontFamily: '"DM Mono", monospace', fontSize: 12, letterSpacing: "0.16em" }}
                   >
                     0{step.step}
                   </Typography>
@@ -71,8 +72,8 @@ export const WorkflowDiagram: React.FC = () => {
                   position: "relative",
                   width: 0,
                   margin: "0 -12px",
-                  color: "primary.main",
-                  opacity: 0.4,
+                  color: "#00c9a7",
+                  opacity: 0.65,
                 }}
               >
                 <ArrowForwardRoundedIcon />

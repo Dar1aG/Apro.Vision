@@ -15,22 +15,31 @@ const LABELS: Record<RiskLevel, string> = {
   HIGH: "High Risk",
 };
 
+// Convert hex to rgba
+const rgba = (hex: string, a: number) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${a})`;
+};
+
 export const RiskBadge: React.FC<RiskBadgeProps> = ({ level, size = "small" }) => {
   const color = RISK_COLORS[level];
   return (
     <Chip
       data-testid={`risk-badge-${level.toLowerCase()}`}
       size={size}
-      icon={<CircleIcon sx={{ fontSize: "10px !important", color: `${color} !important` }} />}
+      icon={<CircleIcon sx={{ fontSize: "9px !important", color: `${color} !important` }} />}
       label={LABELS[level]}
       sx={{
-        bgcolor: `${color}14`,
+        bgcolor: rgba(color, 0.12),
         color: color,
-        border: `1px solid ${color}40`,
-        borderRadius: 1.5,
+        border: `1px solid ${rgba(color, 0.32)}`,
+        borderRadius: 999,
         fontWeight: 600,
-        letterSpacing: "0.02em",
-        ".MuiChip-icon": { ml: 1 },
+        letterSpacing: "0.04em",
+        ".MuiChip-icon": { ml: 1.25 },
+        ".MuiChip-label": { paddingInline: 1.25 },
       }}
     />
   );

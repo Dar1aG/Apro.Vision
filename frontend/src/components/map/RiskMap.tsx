@@ -42,7 +42,10 @@ export const RiskMap: React.FC = () => {
   }, []);
 
   return (
-    <Card data-testid="risk-map-card" sx={{ position: "relative", overflow: "hidden", height: { xs: 520, md: 640 } }}>
+    <Card
+      data-testid="risk-map-card"
+      sx={{ position: "relative", overflow: "hidden", height: { xs: 520, md: 640 }, p: 0 }}
+    >
       <MapContainer
         center={[20, 30]}
         zoom={2.4}
@@ -54,27 +57,33 @@ export const RiskMap: React.FC = () => {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> · &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         />
         <ZoomControl position="bottomright" />
         {suppliers.map((s) => (
-          <Marker
-            key={s.id}
-            position={[s.location.lat, s.location.lng]}
-            icon={ICONS[s.riskLevel]}
-            eventHandlers={{ click: () => {} }}
-          >
+          <Marker key={s.id} position={[s.location.lat, s.location.lng]} icon={ICONS[s.riskLevel]}>
             <Popup maxWidth={280}>
               <Box sx={{ p: 0.5, minWidth: 220 }} data-testid={`map-popup-${s.id}`}>
-                <Typography variant="overline" sx={{ color: "text.secondary", fontSize: 10 }}>
+                <Typography
+                  variant="overline"
+                  sx={{ color: "text.secondary", fontSize: 10, letterSpacing: "0.12em" }}
+                >
                   {s.location.city}, {s.location.country}
                 </Typography>
-                <Typography variant="subtitle2" sx={{ fontWeight: 700, lineHeight: 1.3, mt: 0.25 }}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ fontWeight: 700, lineHeight: 1.3, mt: 0.25, color: "text.primary" }}
+                >
                   {s.name}
                 </Typography>
                 <Stack direction="row" alignItems="center" spacing={1} mt={1}>
                   <RiskBadge level={s.riskLevel} />
-                  <Chip size="small" label={`WPI ${s.pollutionIndex}`} variant="outlined" sx={{ fontFamily: '"IBM Plex Mono", monospace' }} />
+                  <Chip
+                    size="small"
+                    label={`WPI ${s.pollutionIndex}`}
+                    variant="outlined"
+                    sx={{ fontFamily: '"DM Mono", monospace' }}
+                  />
                 </Stack>
                 <button
                   data-testid={`map-popup-view-${s.id}`}
@@ -85,12 +94,13 @@ export const RiskMap: React.FC = () => {
                     padding: "8px 12px",
                     border: "none",
                     borderRadius: 8,
-                    background: "#0F2A47",
-                    color: "#fff",
+                    background: "#00c9a7",
+                    color: "#0d1b2e",
                     cursor: "pointer",
                     fontFamily: "inherit",
-                    fontWeight: 600,
+                    fontWeight: 700,
                     fontSize: 13,
+                    letterSpacing: "0.02em",
                   }}
                 >
                   View details →
@@ -101,7 +111,6 @@ export const RiskMap: React.FC = () => {
         ))}
       </MapContainer>
 
-      {/* Floating legend */}
       <Card
         data-testid="map-legend"
         sx={{
@@ -109,22 +118,38 @@ export const RiskMap: React.FC = () => {
           top: 16,
           left: 16,
           p: 2,
-          minWidth: 200,
+          minWidth: 220,
           zIndex: 999,
-          backdropFilter: "blur(10px)",
-          bgcolor: "rgba(255,255,255,0.92)",
-          boxShadow: "0 12px 28px -16px rgba(15, 42, 71, 0.3)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          bgcolor: "rgba(13,27,46,0.78)",
+          border: "1px solid rgba(255,255,255,0.10)",
         }}
       >
-        <Typography variant="overline" sx={{ color: "text.secondary", fontSize: 10 }}>Risk legend</Typography>
-        <Stack spacing={1} mt={1}>
+        <Typography variant="overline" sx={{ display: "block", mb: 1.25 }}>
+          Risk legend
+        </Typography>
+        <Stack spacing={1}>
           {LEGEND.map((l) => (
             <Stack key={l.level} direction="row" alignItems="center" justifyContent="space-between">
               <Stack direction="row" alignItems="center" spacing={1.25}>
-                <Box sx={{ width: 12, height: 12, borderRadius: "50%", bgcolor: RISK_COLORS[l.level], boxShadow: `0 0 0 3px ${RISK_COLORS[l.level]}22` }} />
-                <Typography variant="body2">{l.label}</Typography>
+                <Box
+                  sx={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: "50%",
+                    bgcolor: RISK_COLORS[l.level],
+                    boxShadow: `0 0 0 3px ${RISK_COLORS[l.level]}26`,
+                  }}
+                />
+                <Typography variant="body2" sx={{ color: "text.primary" }}>
+                  {l.label}
+                </Typography>
               </Stack>
-              <Typography variant="caption" sx={{ color: "text.secondary", fontFamily: '"IBM Plex Mono", monospace' }}>
+              <Typography
+                variant="caption"
+                sx={{ color: "text.secondary", fontFamily: '"DM Mono", monospace' }}
+              >
                 {counts[l.level]}
               </Typography>
             </Stack>

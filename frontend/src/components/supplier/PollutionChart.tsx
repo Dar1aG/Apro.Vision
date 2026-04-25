@@ -19,23 +19,31 @@ interface PollutionChartProps {
   anomalies: Anomaly[];
 }
 
-const TooltipContent: React.FC<{ active?: boolean; payload?: Array<{ value: number }>; label?: string }> = ({ active, payload, label }) => {
+const TooltipContent: React.FC<{ active?: boolean; payload?: Array<{ value: number }>; label?: string }> = ({
+  active,
+  payload,
+  label,
+}) => {
   if (!active || !payload || payload.length === 0) return null;
   const v = payload[0].value;
   return (
     <Box
       sx={{
-        bgcolor: "primary.main",
-        color: "primary.contrastText",
-        px: 1.5,
-        py: 1,
+        bgcolor: "rgba(13,27,46,0.96)",
+        color: "#e8edf4",
+        px: 1.75,
+        py: 1.25,
         borderRadius: 1.5,
-        boxShadow: "0 8px 22px -8px rgba(15, 42, 71, 0.55)",
+        border: "1px solid rgba(255,255,255,0.14)",
+        boxShadow: "0 12px 28px -10px rgba(0,0,0,0.6)",
         fontSize: 12,
+        backdropFilter: "blur(10px)",
       }}
     >
-      <Box sx={{ opacity: 0.7, fontFamily: '"IBM Plex Mono", monospace', fontSize: 11 }}>{label}</Box>
-      <Box sx={{ fontWeight: 700, mt: 0.25 }}>WPI {v}</Box>
+      <Box sx={{ color: "#8fa3bb", fontFamily: '"DM Mono", monospace', fontSize: 11 }}>{label}</Box>
+      <Box sx={{ fontWeight: 700, mt: 0.25, fontFamily: '"DM Mono", monospace', color: "#00c9a7" }}>
+        WPI {v}
+      </Box>
     </Box>
   );
 };
@@ -47,34 +55,45 @@ export const PollutionChart: React.FC<PollutionChartProps> = ({ data, anomalies 
         <ComposedChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
           <defs>
             <linearGradient id="poll-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#1F4068" stopOpacity={0.32} />
-              <stop offset="95%" stopColor="#1F4068" stopOpacity={0} />
+              <stop offset="5%" stopColor="#00c9a7" stopOpacity={0.32} />
+              <stop offset="95%" stopColor="#00c9a7" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 6" stroke="rgba(15, 42, 71, 0.08)" vertical={false} />
+          <CartesianGrid strokeDasharray="3 6" stroke="rgba(255,255,255,0.07)" vertical={false} />
           <XAxis
             dataKey="date"
-            tick={{ fill: "#4A5A6E", fontSize: 11 }}
+            tick={{ fill: "#8fa3bb", fontSize: 11, fontFamily: "DM Mono, monospace" }}
             tickLine={false}
-            axisLine={{ stroke: "rgba(15, 42, 71, 0.12)" }}
+            axisLine={{ stroke: "rgba(255,255,255,0.08)" }}
             interval={2}
           />
           <YAxis
             domain={[0, 100]}
-            tick={{ fill: "#4A5A6E", fontSize: 11 }}
+            tick={{ fill: "#8fa3bb", fontSize: 11, fontFamily: "DM Mono, monospace" }}
             tickLine={false}
-            axisLine={{ stroke: "rgba(15, 42, 71, 0.12)" }}
-            label={{ value: "Pollution Index", angle: -90, position: "insideLeft", offset: 20, fill: "#4A5A6E", fontSize: 11 }}
+            axisLine={{ stroke: "rgba(255,255,255,0.08)" }}
+            label={{
+              value: "Pollution Index",
+              angle: -90,
+              position: "insideLeft",
+              offset: 20,
+              fill: "#5a7491",
+              fontSize: 11,
+              letterSpacing: "0.08em",
+            }}
           />
-          <Tooltip content={<TooltipContent />} cursor={{ stroke: "#1F4068", strokeDasharray: "3 4", strokeOpacity: 0.5 }} />
+          <Tooltip
+            content={<TooltipContent />}
+            cursor={{ stroke: "#00c9a7", strokeDasharray: "3 4", strokeOpacity: 0.55 }}
+          />
           <Area type="monotone" dataKey="value" stroke="none" fill="url(#poll-fill)" />
           <Line
             type="monotone"
             dataKey="value"
-            stroke="#0F2A47"
+            stroke="#00c9a7"
             strokeWidth={2.4}
-            dot={{ r: 3, fill: "#0F2A47", strokeWidth: 0 }}
-            activeDot={{ r: 6, fill: "#1F4068", stroke: "#FFF", strokeWidth: 2 }}
+            dot={{ r: 3, fill: "#00c9a7", strokeWidth: 0 }}
+            activeDot={{ r: 6, fill: "#00c9a7", stroke: "#0d1b2e", strokeWidth: 2 }}
             isAnimationActive
             animationDuration={750}
           />
@@ -88,7 +107,7 @@ export const PollutionChart: React.FC<PollutionChartProps> = ({ data, anomalies 
                 y={point.value}
                 r={7}
                 fill={RISK_COLORS[a.severity]}
-                stroke="#FFF"
+                stroke="#0d1b2e"
                 strokeWidth={2.5}
               />
             );

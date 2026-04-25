@@ -50,9 +50,10 @@ const SidebarContent: React.FC<{ collapsed: boolean; onToggleCollapse: () => voi
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        bgcolor: "background.paper",
-        borderRight: "1px solid",
-        borderColor: "divider",
+        bgcolor: "rgba(13,27,46,0.6)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderRight: "1px solid rgba(255,255,255,0.07)",
       }}
       data-testid="sidebar"
     >
@@ -60,10 +61,15 @@ const SidebarContent: React.FC<{ collapsed: boolean; onToggleCollapse: () => voi
         direction="row"
         alignItems="center"
         justifyContent={collapsed ? "center" : "space-between"}
-        sx={{ px: collapsed ? 1 : 2.5, py: 2, minHeight: 64, borderBottom: "1px solid", borderColor: "divider" }}
+        sx={{
+          px: collapsed ? 1 : 2.5,
+          py: 2,
+          minHeight: 64,
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+        }}
       >
         {!collapsed && (
-          <Typography variant="overline" sx={{ color: "text.secondary", fontSize: 10 }}>
+          <Typography variant="overline" sx={{ fontSize: 10 }}>
             Workspace
           </Typography>
         )}
@@ -80,7 +86,8 @@ const SidebarContent: React.FC<{ collapsed: boolean; onToggleCollapse: () => voi
 
       <List sx={{ flexGrow: 1, px: 1.25, py: 2 }}>
         {ITEMS.map((item) => {
-          const active = item.path === "/" ? location.pathname === "/" : location.pathname.startsWith(item.path);
+          const active =
+            item.path === "/" ? location.pathname === "/" : location.pathname.startsWith(item.path);
           const button = (
             <ListItemButton
               key={item.path}
@@ -94,10 +101,13 @@ const SidebarContent: React.FC<{ collapsed: boolean; onToggleCollapse: () => voi
                 px: collapsed ? 1.25 : 1.75,
                 py: 1.1,
                 justifyContent: collapsed ? "center" : "flex-start",
-                color: active ? "primary.main" : "text.secondary",
-                bgcolor: active ? "rgba(15, 42, 71, 0.06)" : "transparent",
+                color: active ? "#00c9a7" : "text.secondary",
+                bgcolor: active ? "rgba(0,201,167,0.08)" : "transparent",
                 position: "relative",
-                "&:hover": { bgcolor: "rgba(15, 42, 71, 0.04)", color: "primary.main" },
+                "&:hover": {
+                  bgcolor: active ? "rgba(0,201,167,0.12)" : "rgba(255,255,255,0.04)",
+                  color: active ? "#00c9a7" : "text.primary",
+                },
                 "&:before": active
                   ? {
                       content: '""',
@@ -107,7 +117,7 @@ const SidebarContent: React.FC<{ collapsed: boolean; onToggleCollapse: () => voi
                       bottom: 8,
                       width: 3,
                       borderRadius: 2,
-                      bgcolor: "secondary.main",
+                      bgcolor: "#00c9a7",
                     }
                   : undefined,
               }}
@@ -126,7 +136,7 @@ const SidebarContent: React.FC<{ collapsed: boolean; onToggleCollapse: () => voi
                   primary={item.label}
                   primaryTypographyProps={{
                     fontSize: 14,
-                    fontWeight: active ? 700 : 500,
+                    fontWeight: active ? 600 : 500,
                   }}
                 />
               )}
@@ -143,11 +153,19 @@ const SidebarContent: React.FC<{ collapsed: boolean; onToggleCollapse: () => voi
       </List>
 
       {!collapsed && (
-        <Box sx={{ p: 2, m: 2, borderRadius: 2, bgcolor: "rgba(46, 125, 82, 0.08)", border: "1px solid rgba(46, 125, 82, 0.18)" }}>
-          <Typography variant="caption" sx={{ color: "secondary.dark", fontWeight: 700, display: "block", mb: 0.5 }}>
-            ESA POWERED
+        <Box
+          sx={{
+            p: 2,
+            m: 2,
+            borderRadius: 2,
+            bgcolor: "rgba(0,201,167,0.06)",
+            border: "1px solid rgba(0,201,167,0.22)",
+          }}
+        >
+          <Typography variant="overline" sx={{ color: "#00c9a7", display: "block", mb: 0.5 }}>
+            ESA Powered
           </Typography>
-          <Typography variant="caption" sx={{ color: "text.secondary", lineHeight: 1.45 }}>
+          <Typography variant="caption" sx={{ color: "text.secondary", lineHeight: 1.5 }}>
             Built on Copernicus Sentinel data feeds
           </Typography>
         </Box>
@@ -156,7 +174,12 @@ const SidebarContent: React.FC<{ collapsed: boolean; onToggleCollapse: () => voi
   );
 };
 
-export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggleCollapse, mobileOpen, onMobileClose }) => {
+export const Sidebar: React.FC<SidebarProps> = ({
+  collapsed,
+  onToggleCollapse,
+  mobileOpen,
+  onMobileClose,
+}) => {
   const width = collapsed ? SIDEBAR_COLLAPSED : SIDEBAR_WIDTH;
   return (
     <>
@@ -195,7 +218,5 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggleCollapse, m
     </>
   );
 };
-
-export const SIDEBAR_WIDTHS = { open: SIDEBAR_WIDTH, closed: SIDEBAR_COLLAPSED };
 
 export default Sidebar;

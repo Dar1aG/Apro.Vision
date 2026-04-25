@@ -81,7 +81,7 @@ const CompaniesPage: React.FC = () => {
     <Container maxWidth="xl" disableGutters data-testid="companies-page">
       <Stack direction={{ xs: "column", md: "row" }} alignItems={{ xs: "flex-start", md: "flex-end" }} justifyContent="space-between" spacing={2} mb={4}>
         <Box>
-          <Typography variant="overline" sx={{ color: "secondary.dark" }}>Portfolio</Typography>
+          <Typography variant="overline" sx={{ color: "#00c9a7" }}>Portfolio</Typography>
           <Typography variant="h4" sx={{ fontWeight: 700, mt: 0.5 }}>Monitored Companies</Typography>
           <Typography variant="body2" sx={{ color: "text.secondary", mt: 1 }}>
             European fashion brands ranked by aggregated supply-chain pollution risk.
@@ -205,7 +205,7 @@ const CompaniesPage: React.FC = () => {
                             "& .MuiLinearProgress-bar": { bgcolor: color, borderRadius: 4 },
                           }}
                         />
-                        <Typography variant="caption" sx={{ color: "text.secondary", fontFamily: '"IBM Plex Mono", monospace' }}>
+                        <Typography variant="caption" sx={{ color: "text.secondary", fontFamily: '"DM Mono", monospace' }}>
                           {c.riskScore} / 100
                         </Typography>
                       </Stack>
@@ -215,10 +215,11 @@ const CompaniesPage: React.FC = () => {
                         size="small"
                         label="Active"
                         sx={{
-                          bgcolor: "rgba(46,125,82,0.12)",
-                          color: "secondary.dark",
-                          border: "1px solid rgba(46,125,82,0.28)",
+                          bgcolor: "rgba(34,197,94,0.12)",
+                          color: "#22c55e",
+                          border: "1px solid rgba(34,197,94,0.32)",
                           fontWeight: 600,
+                          letterSpacing: "0.04em",
                         }}
                       />
                     </TableCell>
